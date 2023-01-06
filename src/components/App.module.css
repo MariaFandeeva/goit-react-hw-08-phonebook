@@ -1,5 +1,5 @@
 section {
-  width: 400px;
+  width: 380px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,4 +8,6 @@ section {
   border-radius: 10px;
   box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
   background-color: #b86f6f47;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
