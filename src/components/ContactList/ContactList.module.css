@@ -2,13 +2,16 @@ ul {
   list-style: none;
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  align-items: space-between;
+  padding: 40px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 li {
   display: flex;
-  align-items: baseline;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
 }
 
 p {
