@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { deleteContact, fetchContacts } from 'redux/operations';
 import {
   selectContacts,
-  selectError,
   selectIsLoading,
 } from 'redux/contacts/contactSelectors';
 import { selectFilter } from 'redux/filter/filterSelector';
@@ -16,7 +15,6 @@ export const ContactList = () => {
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilter);
   const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -26,53 +24,30 @@ export const ContactList = () => {
     name.toLowerCase().includes(filter)
   );
 
-  return (
-    <>
-      {isLoading && !error && <Loader />}
-      {isLoading && <p> Total contacts: {contacts.length}</p>}
-      {contacts.length > 0 ? (
-        <ul>
-          {foundContact.map(({ name, id, phone }) => (
-            <li key={id}>
-              <p>
-                {name}: {phone}
-              </p>
-              <button type="button" onClick={() => dispatch(deleteContact(id))}>
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>Phone Book is empty.</p>
-      )}
-    </>
+  return contacts.length === 0 && isLoading ? (
+    <Loader />
+  ) : contacts.length !== 0 && foundContact.length !== 0 ? (
+    <ul>
+      {foundContact.map(({ name, id, phone }) => {
+        return (
+          <li key={id}>
+            <p>
+              {name}: {phone}
+            </p>
+            <button type="button" onClick={() => dispatch(deleteContact(id))}>
+              Delete
+            </button>
+          </li>
+        );
+      })}
+    </ul>
+  ) : contacts.length === 0 ? (
+    <p>Your contacts list is empty</p>
+  ) : (
+    <p>
+      No contact with name <span>{filter}</span> in your list!
+    </p>
   );
-
-  // return contacts.length === 0 && isLoading ? (
-  //   <Loader />
-  // ) : contacts.length !== 0 && foundContact.length !== 0 ? (
-  //   <ul>
-  //     {foundContact.map(({ name, id, phone }) => {
-  //       return (
-  //         <li key={id}>
-  //           <p>
-  //             {name}: {phone}
-  //           </p>
-  //           <button type="button" onClick={() => dispatch(deleteContact(id))}>
-  //             Delete
-  //           </button>
-  //         </li>
-  //       );
-  //     })}
-  //   </ul>
-  // ) : contacts.length === 0 ? (
-  //   <p>Your contacts list is empty</p>
-  // ) : (
-  //   <p>
-  //     No contact with name <span>{filter}</span> in your list!
-  //   </p>
-  // );
 };
 
 ContactList.protoTypes = {
