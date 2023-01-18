@@ -23,6 +23,28 @@ export const ContactList = () => {
   const foundContact = contacts.filter(({ name }) =>
     name.toLowerCase().includes(filter)
   );
+  // return (
+  //   <>
+  //     {isLoading && !error & <Loader />}
+  //     {isLoading && <Loader /> && <p>Total contacts: {contacts.length}</p>}
+  //     {contacts.length > 0 ? (
+  //       <ul>
+  //         {foundContact.map(({ name, id, phone }) => (
+  //           <li key={id}>
+  //             <p>
+  //               {name}: {phone}
+  //             </p>
+  //             <button type="button" onClick={() => dispatch(deleteContact(id))}>
+  //               Delete
+  //             </button>
+  //           </li>
+  //         ))}
+  //       </ul>
+  //     ) : (
+  //       <p>Your phone book is empty.</p>
+  //     )}
+  //   </>
+  // );
 
   return contacts.length === 0 && isLoading ? (
     <Loader />
