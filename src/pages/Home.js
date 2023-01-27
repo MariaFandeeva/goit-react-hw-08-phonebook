@@ -19,7 +19,11 @@ const Home = () => {
         color="lightblue"
         component="h1"
         variant="h3"
-        sx={{ mt: '50px', fontWeight: '500' }}
+        sx={{
+          mt: '50px',
+          fontWeight: '500',
+          textShadow: '2px 2px 1px #333, -2px -2px 0 #0ff',
+        }}
       >
         Stay in contact
       </Typography>
